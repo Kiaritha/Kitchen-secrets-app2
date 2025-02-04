@@ -15,10 +15,24 @@ table,tr,td{
 list1{
   list-style-type: disc;
 }
-.inputs{
-  height: 200px;
-  width:300px;
-}
+  .inputs {
+    width: 250px;
+    height: 150px;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 24px; /* Controls spacing between lines */
+    background: repeating-linear-gradient(
+      to bottom,
+      #fff,
+      #fff 23px,
+      #ddd 24px
+    ); /* Creates the lined effect */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    resize: none; /* Optional: prevents resizing */
+  }
+
 .contents{
   margin:20px;
   border:3px solid;

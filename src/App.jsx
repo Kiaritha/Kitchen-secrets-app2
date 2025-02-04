@@ -3,15 +3,27 @@ import "./recipe.css"
 
 
 export default function RecipeApp() {
-  const [imageFile, setImageFile] = useState(null);
-  const [textarea, setTextarea] = useState("");
-  
+  const [imageFile, setImageFile] = useState({
+  image1:null,
+  image2:null,
+  image3:null
+  });
 
-  const handleDrop = (e) => { 
-    e.preventDefault();
-    const droppedFile = e.dataTransfer.files[0];
-    setImageFile(droppedFile);
-  };
+  const [textarea, setTextarea] = useState({
+    condiments: "",
+    instruction: "",
+    condiments1: "",
+    instruction1: "",
+    condiments2: "",
+    instruction2: ""
+  });
+  
+  
+    const handleDrop = (e, imageKey) => {
+      e.preventDefault();
+      const droppedFile = e.dataTransfer.files[0];
+      setImageFile((prev) => ({ ...prev, [imageKey]: droppedFile }));
+    };
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -25,6 +37,18 @@ export default function RecipeApp() {
  
   const handleSubmit = (event) => {
     event.preventDefault();
+  };
+
+  const handleReset=()=> {
+    setImageFile({ image1: null, image2: null, image3: null });
+    setTextarea({
+      condiments: "",
+    instruction: "",
+    condiments1: "",
+    instruction1: "",
+    condiments2: "",
+    instruction2: ""
+    });
   };
 
   
@@ -51,22 +75,22 @@ export default function RecipeApp() {
             color: 'ivory',
             margin: '20px',
           }}
-          onDrop={handleDrop}
+          onDrop={(e)=>handleDrop(e, "image1")}
           onDragOver={handleDragOver}
         >
-          {imageFile ? (
+          {imageFile.image1 ? (
             <div>
-              <p>{imageFile.name}</p>
-              {imageFile.type.startsWith('image') && (
+              <p>{imageFile.image1.name}</p>
+              {imageFile.image1.type.startsWith('image') && (
                 <img
-                  src={URL.createObjectURL(imageFile)}
+                  src={URL.createObjectURL(imageFile.image1)}
                   alt="preview"
                   style={{ width: '35%', height: '35%', marginTop: '10px' }}
                 />
               )}
             </div>
           ) : (
-            <p>Drag and drop a imageFile here, or click to select a imageFile</p>
+            <p>Drag and drop a imageFile here</p>
           )}
         </div>
 
@@ -91,22 +115,22 @@ export default function RecipeApp() {
             color: 'ivory',
             margin: '20px',
           }}
-          onDrop={handleDrop}
+          onDrop={(e)=>handleDrop(e, "image2")}
           onDragOver={handleDragOver}
         >
-          {imageFile ? (
+          {imageFile.image2 ? (
             <div>
-              <p>{imageFile.name}</p>
-              {imageFile.type.startsWith('image') && (
+              <p>{imageFile.image2.name}</p>
+              {imageFile.image2.type.startsWith('image') && (
                 <img
-                  src={URL.createObjectURL(imageFile)}
+                  src={URL.createObjectURL(imageFile.image2)}
                   alt="preview"
                   style={{ width: '50%', height: '50%', marginTop: '10px' }}
                 />
               )}
             </div>
           ) : (
-            <p>Drag and drop a imageFile here, or click to select a imageFile</p>
+            <p>Drag and drop a imageFile here</p>
           )}
         </div>
 </td>
@@ -128,22 +152,22 @@ export default function RecipeApp() {
             color: 'ivory',
             margin: '20px',
           }}
-          onDrop={handleDrop}
+          onDrop={(e)=>handleDrop(e, "image3")}
           onDragOver={handleDragOver}
         >
-          {imageFile ? (
+          {imageFile.image3 ? (
             <div>
-              <p>{imageFile.name}</p>
-              {imageFile.type.startsWith('image') && (
+              <p>{imageFile.image3.name}</p>
+              {imageFile.image3.type.startsWith('image') && (
                 <img
-                  src={URL.createObjectURL(imageFile)}
+                  src={URL.createObjectURL(imageFile.image3)}
                   alt="preview"
                   style={{ maxWidth: '50%', maxHeight: '50%', marginTop: '10px' }}
                 />
               )}
             </div>
           ) : (
-            <p>Drag and drop a imageFile here, or click to select a imageFile</p>
+            <p>Drag and drop a imageFile here</p>
           )}
         </div></td>
          <td> <textarea name="condiments2" value={textarea.condiments2}
@@ -156,7 +180,7 @@ export default function RecipeApp() {
         </tr>
       </tbody>
      </table>
-    <button className="deleteButton">Reset</button>
+    <button className="deleteButton" type="button" onClick={handleReset}>Reset</button>
      </form>
 
     </div>
