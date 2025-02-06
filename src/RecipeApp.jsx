@@ -1,5 +1,8 @@
 import { useState } from "react";
-import "./recipe.css"
+import "./recipe.css";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Loginpage from "./Loginpage";
+import SavedRecipes from "./SavedRecipes";
 
 
 export default function RecipeApp() {
@@ -53,7 +56,17 @@ export default function RecipeApp() {
 
   
   return (
-    <div className="App">
+    <Router>
+       <div className="App">
+      <nav className="navg">
+        <Link to="/">Home</Link> | <Link to="/recipes">Saved Recipes</Link> | <Link to="/login">Log in</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/login" element={<Loginpage />} />
+      <Route
+      path="/"
+      element={
       <form onSubmit={handleSubmit}>
      <table className="contents">
       <tbody>
@@ -180,10 +193,15 @@ export default function RecipeApp() {
         </tr>
       </tbody>
      </table>
+    <button type="submit" className="submitButton">Submit</button>
     <button className="deleteButton" type="button" onClick={handleReset}>Reset</button>
      </form>
-
+   }
+   />
+   <Route path="/recipes"  element={<SavedRecipes imageFile={imageFile} textarea={textarea} />} />
+    </Routes>
     </div>
+    </Router>
   );
 }
 

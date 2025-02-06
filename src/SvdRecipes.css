@@ -1,0 +1,13 @@
+body{
+    background-image: url(aestrecipe1.jpg);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.recipestable{
+    background-color: beige;
+}
+
+tbody,table,tr,td{
+    border: 2px solid black;
+    padding: 10px;
+    
+}
