@@ -53,13 +53,12 @@ export default function RecipeApp() {
     instruction2: ""
     });
   };
-
   
   return (
     <Router>
        <div className="App">
       <nav className="navg">
-        <Link to="/">Home</Link> | <Link to="/recipes">Saved Recipes</Link> | <Link to="/login">Log in</Link>
+        <Link to="/" style={{color: "black"}}>Home</Link> | <Link to="/recipes" style={{color: "black"}} >Saved Recipes</Link> | <Link to="/login" style={{color: "black"}}>Log in</Link>
       </nav>
 
       <Routes>
